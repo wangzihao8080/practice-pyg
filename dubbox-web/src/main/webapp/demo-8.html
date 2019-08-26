@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>angularJS入门Demo-8 内置服务$http</title>
+<script src="angular.min.js"></script>
+		<script>
+			//建立模块
+			var app = angular.module("myApp",[]);
+			//通过模块创建控制器  $scope:控制层与视图层直接交换数据的桥梁￥
+			app.controller("myController",function($scope,$http){
+
+				$scope.findList=function(){
+					$http.get("data.json").success(
+						function(response){
+							$scope.list=response;
+						}	
+					);
+				}
+//				$scope.findList();
+			});
+		</script>
+</head>
+<body ng-app="myApp" ng-controller="myController" ng-init="findList()">
+
+	<table>
+		<tr>
+			<td>姓名</td>
+			<td>数学</td>
+			<td>语文</td>
+		</tr>
+		<tr ng-repeat="x in list">
+			<td>{{x.name}}</td>
+			<td>{{x.shuxue}}</td>
+			<td>{{x.yuwen}}</td>
+		</tr>
+	</table>
+
+</body>
+</html>
